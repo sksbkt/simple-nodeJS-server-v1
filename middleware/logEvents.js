@@ -8,7 +8,8 @@ const { v4: uuid } = require('uuid');
 async function logEvents(message, fileName) {
     const dateTime = `${format(new Date(), 'yyyy.MM.dd\tHH:mm:ss')}`;
     const logItem = `${dateTime}\t${uuid()}\t${message}\n`;
-    const dirPath = path.join(__dirname, 'logs');
+    //? '..' UP one directory
+    const dirPath = path.join(__dirname, '..', 'logs');
 
     try {
         if (!fs.existsSync(dirPath)) {
@@ -20,4 +21,9 @@ async function logEvents(message, fileName) {
     }
 }
 
-module.exports = logEvents;
+const logger = (req, res, next) => {
+    logEvents(`${req.method}\t${req.headers.origin}\t${req.url}`, 'reqLog.txt');
+    console.log(req.method, req.path);
+    next();
+};
+module.exports = { logEvents, logger };
