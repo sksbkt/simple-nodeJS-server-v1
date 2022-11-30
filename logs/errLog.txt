@@ -29,3 +29,4 @@
 2022.11.29	16:46:56	b5e2d35c-849a-49c3-adfc-98f5ee0985ea	Error: Cannot set headers after they are sent to the client
 2022.11.29	16:47:05	310a0f95-a200-4197-a2f6-08c69fc747ef	Error: Cannot set headers after they are sent to the client
 2022.11.29	16:47:09	36941922-975a-47c4-9788-08d0b6e22e21	Error: Cannot set headers after they are sent to the client
+2022.11.30	11:01:22	39a99034-472f-4f21-87af-4f0e315154e2	ReferenceError: firstname is not defined

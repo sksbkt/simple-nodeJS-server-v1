@@ -5,6 +5,7 @@ const cors = require('cors');
 const { logger } = require('./middleware/logEvents');
 const e = require('express');
 const errorHandler = require('./middleware/errorHandler');
+const corsOption = require('./config/corsOptions');
 const PORT = process.env.PORT || 3500;
 
 
@@ -13,16 +14,6 @@ const PORT = process.env.PORT || 3500;
 app.use(logger);
 
 //? CORS cross-origin-resource-sharing
-const whiteList = ['https://www.YOUR_WEBSITE.com', 'http://127.0.0.1:5500', 'http://localhost:3500'];
-const corsOption = {
-    origin: (origin, callback) => {
-        if (whiteList.indexOf(origin) != -1 || !origin) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'))
-        }
-    }, optionsSuccessStatus: 200
-}
 app.use(cors(corsOption));
 
 //? builtin middleWares
@@ -34,12 +25,11 @@ app.use(express.json());
 
 //? for static files e.g: .css .jpg .txt
 app.use('/', express.static(path.join(__dirname, '/public')));
-app.use('/subdir', express.static(path.join(__dirname, '/public'))); //? we are telling express to use/load public folder for /subdir
 
 
 //? routes
 app.use('/', require('./routes/root'))
-app.use('/subdir', require('./routes/subdir'));
+app.use('/employees', require('./routes/api/employees'));
 
 
 //? 404
