@@ -1,10 +1,13 @@
 const usersDB = {
     users: require('../model/users.json'),
-    setUsers: function (data) { this.users = data; }
+    setUsers: function (data) { this.users = data }
 }
 const fsPromises = require('fs').promises;
 const path = require('path');
 const bcrypt = require('bcrypt');
+
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 async function handleLogin(req, res) {
     const { user, pwd } = req.body;
@@ -20,8 +23,35 @@ async function handleLogin(req, res) {
     //evaluate password
     const match = await bcrypt.compare(pwd, foundUser.password);
     if (match) {
-        //* JWT will be created here
-        res.json({ 'success': `User ${user} is logged in` });
+        //* JWT
+        const accessToken = jwt.sign(
+            { "username": foundUser.username },
+            process.env.ACCESS_TOKEN_SECRET,
+            { expiresIn: '30s' }
+        );
+        const refreshToken = jwt.sign(
+            { "username": foundUser.username },
+            process.env.REFRESH_TOKEN_SECRET,
+            { expiresIn: '1d' }
+        );
+        //? saving refresh token along side current user object
+        const otherUsers = usersDB.users.filter(person => person.username !== foundUser.username);
+        const currentUser = { ...foundUser, refreshToken };
+        usersDB.setUsers([...otherUsers, currentUser]);
+        await fsPromises.writeFile(
+            path.join(__dirname, '..', 'model', 'users.json'),
+            JSON.stringify(usersDB.users)
+        );
+        //? we send refresh token in a *http only* cookie so it will be stored in the heap/ram
+        res.cookie('jwt', refreshToken, {
+            httpOnly: true,
+            sameSite: 'None',
+            // secure: true,
+            //? A day
+            maxAge: 24 * 60 * 60 * 1000
+        });
+        res.json({ accessToken });
+
     } else {
         res.sendStatus(401);
     }

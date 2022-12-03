@@ -5,11 +5,18 @@ const cors = require('cors');
 const { logger } = require('./middleware/logEvents');
 const e = require('express');
 const errorHandler = require('./middleware/errorHandler');
+const verifyJWT = require('./middleware/verifyJWT');
 const corsOption = require('./config/corsOptions');
+const cookieParser = require('cookie-parser');
+const credentials = require('./middleware/credentials');
 const PORT = process.env.PORT || 3500;
 
 //? Custom middleware logger
 app.use(logger);
+
+//? handle credentials check
+//? and fetch credentials requirement
+app.use(credentials);
 
 //? CORS cross-origin-resource-sharing
 app.use(cors(corsOption));
@@ -21,14 +28,23 @@ app.use(express.urlencoded({ extended: false }));
 //? for json
 app.use(express.json());
 
+//? middle for cookies
+app.use(cookieParser());
+
 //? for static files e.g: .css .jpg .txt
 app.use('/', express.static(path.join(__dirname, '/public')));
 
 
 //? routes
-app.use('/', require('./routes/root'))
-app.use('/register', require('./routes/register'))
-app.use('/auth', require('./routes/auth'))
+app.use('/', require('./routes/root'));
+app.use('/register', require('./routes/register'));
+app.use('/auth', require('./routes/auth'));
+app.use('/refresh', require('./routes/refresh'));
+app.use('/logout', require('./routes/logout'));
+
+//? since it work like a waterfall requests to employees route fire have pass verifyJWT
+//? AUTH GUARDED goes below this line
+app.use(verifyJWT);
 app.use('/employees', require('./routes/api/employees'));
 
 

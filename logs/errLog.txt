@@ -30,3 +30,11 @@
 2022.11.29	16:47:05	310a0f95-a200-4197-a2f6-08c69fc747ef	Error: Cannot set headers after they are sent to the client
 2022.11.29	16:47:09	36941922-975a-47c4-9788-08d0b6e22e21	Error: Cannot set headers after they are sent to the client
 2022.11.30	11:01:22	39a99034-472f-4f21-87af-4f0e315154e2	ReferenceError: firstname is not defined
+2022.12.03	13:47:07	6ceac17d-0022-4543-bb30-33a0f585d05e	TypeError: Cannot read properties of undefined (reading 'split')
+2022.12.03	13:57:10	58cf6910-32d6-4c49-90ad-01e46a6c40c4	ReferenceError: next is not defined
+2022.12.03	13:57:12	a57a87c6-f775-4c71-8a75-0c4da745df92	ReferenceError: next is not defined
+2022.12.03	14:13:44	b38551a0-02b0-4a32-a395-a04758a99ce7	ReferenceError: whiteList is not defined
+2022.12.03	14:13:58	84813a42-de4e-4e97-8c9d-9273b589fd6d	TypeError: allowedOrigins.indexOf is not a function
+2022.12.03	14:14:11	6a675edf-6a24-49c9-8d94-d17a3849d6fc	TypeError: allowedOrigins.indexOf is not a function
+2022.12.03	14:15:16	9d0a33e8-6379-42b2-b7b2-e4dd65184a0e	TypeError: allowedOrigins.indexOf is not a function
+2022.12.03	14:16:45	9937373a-7c7c-451b-aa32-e0c10e27a5fb	TypeError: allowedOrigins.indexOf is not a function
