@@ -1,13 +1,14 @@
-const usersDB = {
-    users: require('../model/users.json'),
-    setUsers: function (data) { this.users = data }
-}
-const fsPromises = require('fs').promises;
-const path = require('path');
-const bcrypt = require('bcrypt');
+// const usersDB = {
+//     users: require('../model/users.json'),
+//     setUsers: function (data) { this.users = data }
+// }
+// const fsPromises = require('fs').promises;
+// const path = require('path');
 
+const User = require('../model/User');
+
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
 
 async function handleLogin(req, res) {
     const { user, pwd } = req.body;
@@ -15,7 +16,8 @@ async function handleLogin(req, res) {
         return res.status(400)
             .json({ message: 'Username and password are both required.' });
     }
-    const foundUser = usersDB.users.find(person => person.username === user);
+    // const foundUser = usersDB.users.find(person => person.username === user);
+    const foundUser = await User.findOne({ username: user }).exec();
 
     if (!foundUser) {
         return res.sendStatus(401); //? 401:: Unauthorized 
@@ -42,14 +44,20 @@ async function handleLogin(req, res) {
             { expiresIn: '1d' }
         );
         //? saving refresh token along side current user object
-        const otherUsers = usersDB.users.filter(person => person.username !== foundUser.username);
-        const currentUser = { ...foundUser, refreshToken };
-        usersDB.setUsers([...otherUsers, currentUser]);
-        await fsPromises.writeFile(
-            path.join(__dirname, '..', 'model', 'users.json'),
-            JSON.stringify(usersDB.users)
-        );
+        // const otherUsers = usersDB.users.filter(person => person.username !== foundUser.username);
+        // const currentUser = { ...foundUser, refreshToken };
+        // usersDB.setUsers([...otherUsers, currentUser]);
+        // await fsPromises.writeFile(
+        //     path.join(__dirname, '..', 'model', 'users.json'),
+        //     JSON.stringify(usersDB.users)
+        // );
         //? we send refresh token in a *http only* cookie so it will be stored in the heap/ram
+
+
+        foundUser.refreshToken = refreshToken;
+        const result = await foundUser.save();
+        console.log(result);
+
         res.cookie('jwt', refreshToken, {
             httpOnly: true,
             sameSite: 'None',

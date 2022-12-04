@@ -6,7 +6,7 @@ const ROLES_LIST = require('../../config/roles_list');
 
 // const verifyJWT = require('../../middleware/verifyJWT')
 
-const path = require('path');
+// const path = require('path');
 const verifyRoles = require('../../middleware/verifyRoles');
 
 

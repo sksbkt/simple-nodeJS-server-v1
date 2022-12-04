@@ -38,3 +38,14 @@
 2022.12.03	14:14:11	6a675edf-6a24-49c9-8d94-d17a3849d6fc	TypeError: allowedOrigins.indexOf is not a function
 2022.12.03	14:15:16	9d0a33e8-6379-42b2-b7b2-e4dd65184a0e	TypeError: allowedOrigins.indexOf is not a function
 2022.12.03	14:16:45	9937373a-7c7c-451b-aa32-e0c10e27a5fb	TypeError: allowedOrigins.indexOf is not a function
+2022.12.04	12:16:33	be59ebcb-d722-47c2-88c5-ae4d3f588ef0	TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'MongoClient'
+    |     property 's' -> object with constructor 'Object'
+    |     property 'sessionPool' -> object with constructor 'ServerSessionPool'
+    --- property 'client' closes the circle
+2022.12.04	12:16:48	7424866c-c633-4a42-a621-6fc29c08bb0a	TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'MongoClient'
+    |     property 's' -> object with constructor 'Object'
+    |     property 'sessionPool' -> object with constructor 'ServerSessionPool'
+    --- property 'client' closes the circle
+2022.12.04	12:19:38	24c62eab-571a-4ff9-a9c1-40e6fb764ac7	SyntaxError: Expected ',' or '}' after property value in JSON at position 9
