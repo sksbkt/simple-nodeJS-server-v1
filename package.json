@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Express tutorial",
   "main": "server.js",
+  "engines": {
+    "npm": ">=6.17.1",
+    "node": ">=16.6.1"
+  },
   "scripts": {
     "start": "node server",
     "dev": "nodemon server"

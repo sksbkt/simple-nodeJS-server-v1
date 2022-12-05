@@ -654,3 +654,10 @@
 2022.12.04	13:24:40	210e93ca-40b5-4b4d-bf99-4fc1005bcb1e	GET	undefined	/users
 2022.12.04	13:24:57	1ba78a31-c05a-41a9-a86f-a43a46f74fcc	POST	undefined	/auth
 2022.12.04	13:25:11	1281d9a1-2c62-417f-bf61-5e6378873e69	DELETE	undefined	/users
+2022.12.04	14:10:37	72225ab0-e9ee-49ad-b925-9a853ab34660	GET	undefined	/
+2022.12.04	14:10:37	cb231740-a321-45db-b311-0fd8838a0f5e	GET	undefined	/css/style.css
+2022.12.04	14:10:37	5eaf263b-caba-4608-a87f-2f6834d40742	GET	undefined	/
+2022.12.05	12:51:24	d5429bee-9d3c-43d4-ad66-90f3e69e649f	GET	undefined	/
+2022.12.05	12:51:24	740b1b01-9ba1-47c4-ab7f-765ec9d5f6fe	GET	undefined	/css/style.css
+2022.12.05	12:51:25	c489b274-6e9c-4690-aa12-5bfd3c5f45e4	GET	undefined	/
+2022.12.05	12:51:41	8ffb16c2-8369-410b-9f63-e5c41045a218	POST	undefined	/auth
