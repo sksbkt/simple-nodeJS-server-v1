@@ -8,7 +8,7 @@ async function connectDB() {
             useNewUrlParser: true
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 }
 

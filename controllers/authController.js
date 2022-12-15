@@ -1,31 +1,23 @@
-// const usersDB = {
-//     users: require('../model/users.json'),
-//     setUsers: function (data) { this.users = data }
-// }
-// const fsPromises = require('fs').promises;
-// const path = require('path');
-
 const User = require('../model/User');
-
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 async function handleLogin(req, res) {
     const { user, pwd } = req.body;
-    if (!user || !pwd) {
-        return res.status(400)
-            .json({ message: 'Username and password are both required.' });
-    }
+    if (!user || !pwd) return res.status(400).json({ 'message': 'Username and password are required.' });
+
     // const foundUser = usersDB.users.find(person => person.username === user);
     const foundUser = await User.findOne({ username: user }).exec();
-
+    console.log('HERE');
     if (!foundUser) {
         return res.sendStatus(401); //? 401:: Unauthorized 
     }
     //evaluate password
     const match = await bcrypt.compare(pwd, foundUser.password);
     if (match) {
-        const roles = Object.values(foundUser.roles);
+        // const roles = Object.values(JfoundUser.roles).filter(Boolean);
+        const roles = Object.values(foundUser.roles).filter(Boolean);
+        console.log(roles);
         //* JWT
         const accessToken = jwt.sign(
             {
@@ -36,7 +28,7 @@ async function handleLogin(req, res) {
                 },
             },
             process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: '30s' }
+            { expiresIn: '10s' }
         );
         const refreshToken = jwt.sign(
             { "username": foundUser.username },
@@ -60,12 +52,13 @@ async function handleLogin(req, res) {
 
         res.cookie('jwt', refreshToken, {
             httpOnly: true,
+            //? IMPORTANT
+            secure: true,
             sameSite: 'None',
-            // secure: true,
-            //? A day
             maxAge: 24 * 60 * 60 * 1000
         });
-        res.json({ accessToken });
+
+        res.json({ roles, accessToken });
 
     } else {
         res.sendStatus(401);

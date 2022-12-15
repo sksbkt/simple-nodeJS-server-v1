@@ -3,16 +3,14 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const cors = require('cors');
+const corsOptions = require('./config/corsOptions');
 const { logger } = require('./middleware/logEvents');
 const errorHandler = require('./middleware/errorHandler');
 const verifyJWT = require('./middleware/verifyJWT');
-const corsOption = require('./config/corsOptions');
 const cookieParser = require('cookie-parser');
 const credentials = require('./middleware/credentials');
-
 const mongoose = require('mongoose');
 const connectDB = require('./config/dbConn');
-
 const PORT = process.env.PORT || 3500;
 
 //? connect to mongoDB
@@ -28,7 +26,7 @@ app.use(credentials);
 
 
 //? CORS cross-origin-resource-sharing
-app.use(cors(corsOption));
+app.use(cors(corsOptions));
 
 //? builtin middleWares
 //? 'content-type: application/x-www.form-urlencoded
@@ -64,14 +62,11 @@ app.all('*', (req, res) => {
     res.status(404);
     if (req.accepts('html')) {
         res.sendFile(path.join(__dirname, 'views', '404.html'));
-        return;
+    } else if (req.accepts('json')) {
+        res.json({ "error": "404 Not Found" });
+    } else {
+        res.type('txt').send("404 Not Found");
     }
-    if (req.accepts('json')) {
-        res.json({ error: '404 NOT FOUND' });
-        return;
-    }
-    res.type('txt').send('404 NOT FOUND');
-
 });
 
 app.use(errorHandler);

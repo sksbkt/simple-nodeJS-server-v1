@@ -49,3 +49,15 @@
     |     property 'sessionPool' -> object with constructor 'ServerSessionPool'
     --- property 'client' closes the circle
 2022.12.04	12:19:38	24c62eab-571a-4ff9-a9c1-40e6fb764ac7	SyntaxError: Expected ',' or '}' after property value in JSON at position 9
+2022.12.06	12:04:05	7cb6333b-b35a-490e-849a-fa315b9a7533	TypeError: res.headers is not a function
+2022.12.06	12:04:51	e0aab367-e68f-4106-945d-3a784ed7e080	TypeError: res.headers is not a function
+2022.12.06	12:07:25	f90b7613-6d8a-4b27-bf37-5965f529352b	TypeError: res.headers is not a function
+2022.12.06	12:07:55	f9299d58-96d5-404b-a808-9775e653094d	TypeError: res.headers is not a function
+2022.12.06	12:10:25	d86a7a97-3028-4f0f-81d8-3e02b75e409c	TypeError: req.headers is not a function
+2022.12.06	12:11:17	7f46f1f0-9ddd-428f-a631-b6aac145f26a	TypeError: res.headers is not a function
+2022.12.06	12:22:08	df53b0b0-20fd-4381-b687-e645db5ef4a3	TypeError: res.headers is not a function
+2022.12.12	14:14:09	f0dfc667-b583-49b1-8208-0e633733bc95	Error: Not allowed by CORS
+2022.12.12	16:42:01	7d2dd470-2960-4e11-b3c5-e0c894688be7	Error: Not allowed by CORS
+2022.12.12	16:42:31	f8922ea9-6ef1-4af9-880f-cd0f9eab0fde	Error: Not allowed by CORS
+2022.12.12	16:42:33	24d4754a-dbd4-4a97-90b4-48567a7cec69	Error: Not allowed by CORS
+2022.12.12	16:43:23	88f6d4dc-c485-4743-8ad8-6547d6622c97	Error: Not allowed by CORS
