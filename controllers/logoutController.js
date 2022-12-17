@@ -21,7 +21,7 @@ async function handleLogout(req, res) {
         res.clearCookie('jwt', {
             httpOnly: true,
             sameSite: 'None',
-            // secure: true,
+            secure: true,
             // maxAge: 24 * 60 * 60 * 1000
         });
         return res.sendStatus(204);
@@ -39,7 +39,7 @@ async function handleLogout(req, res) {
     res.clearCookie('jwt', {
         httpOnly: true,
         sameSite: 'None',
-        // secure: true,//? secure: true only servers on https :: WILL BE ADDED IN PRODUCTION
+        secure: true,//? secure: true only servers on https :: WILL BE ADDED IN PRODUCTION
     });
     return res.sendStatus(204);
 }
