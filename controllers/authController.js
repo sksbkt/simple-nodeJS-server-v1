@@ -28,12 +28,12 @@ async function handleLogin(req, res) {
                 },
             },
             process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: '10m' }
+            { expiresIn: process.env.ACCESS_TOKEN_DURATION ?? '10m' }
         );
         const refreshToken = jwt.sign(
             { "username": foundUser.username },
             process.env.REFRESH_TOKEN_SECRET,
-            { expiresIn: '1d' }
+            { expiresIn: process.env.REFRESH_TOKEN_DURATION ?? '1d' }
         );
         //? saving refresh token along side current user object
         // const otherUsers = usersDB.users.filter(person => person.username !== foundUser.username);
