@@ -31,8 +31,7 @@ async function handleLogout(req, res) {
     // const currentUser = { ...foundUser, refreshToken: '' };
     // usersDB.setUsers([...otherUsers, currentUser]);
     // await fsPromises.writeFile(path.join(__dirname, '..', 'model', 'users.json'), JSON.stringify(usersDB.users));
-
-    foundUser.refreshToken = '';
+    foundUser.refreshToken = foundUser.refreshToken.filter(rt => rt !== refreshToken);
     const result = await foundUser.save();
     console.log(result);
 
